@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>传奇私服</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link type="text/css" rel="stylesheet" href="../css/common.css">
+</head>
+<body>
+	<h1>***当前时间：<span class="date">${.now?string("yyyy-MM-dd HH:mm:ss")}</span>***</h1>
+	<div class="body">
+		<div class="thead">
+			<ul>
+				<li style="display: none;">随机数</li>
+				<li>服务器名称</li>
+				<li>服务器IP</li>
+				<li>开服时间</li>
+				<li>线路类型</li>
+				<li>客服QQ</li>
+				<li>详情介绍</li>
+			</ul>
+			<div style="clear:both;"></div>
+		</div>
+		<div class="tbody">
+			<#list games?sort_by(['random']) as item>
+				<ul>
+					<li style="display: none;">${item.random }<li>
+					<li>${item.name }<li>
+					<li>${item.qufu }<li>
+					<li>${item.date?string("yyyy-MM-dd HH:mm:ss") }<li>
+					<li>${item.type }<li>
+					<li>${item.qq }<li>
+					<li>点击查看<li>
+				</ul>
+				<div style="clear:both;"></div>
+	        </#list>
+		</div>
+		
+	</div>
+</body>
+<script type="text/javascript" src="http://pic.8wan.com/static/www/common/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" >
+
+	$(function(){
+		console.log("**********************************");
+// 		monitorStatus();
+		timerNow();
+	})
+	var timer2 = null;
+	function timerNow(){
+		timer2 = setInterval(updateTime, 1000);
+	}
+	function updateTime(){
+		var time = dateFormat(new Date())
+		$('.date').text(time);
+// 		console.log('/*/*/*/*/*/*/*');
+	}
+	//时间格式化函数，此处仅针对yyyy-MM-dd hh:mm:ss 的格式进行格式化
+	function dateFormat(time){
+		var date=new Date(time);
+	    var year=date.getFullYear();
+	    /* 在日期格式中，月份是从0开始的，因此要加1
+	     * 使用三元表达式在小于10的前面加0，以达到格式统一  如 09:11:05
+	     * */
+	    var month= date.getMonth()+1<10 ? "0"+(date.getMonth()+1) : date.getMonth()+1;
+	    var day=date.getDate()<10 ? "0"+date.getDate() : date.getDate();
+	    var hours=date.getHours()<10 ? "0"+date.getHours() : date.getHours();
+	    var minutes=date.getMinutes()<10 ? "0"+date.getMinutes() : date.getMinutes();
+	    var seconds=date.getSeconds()<10 ? "0"+date.getSeconds() : date.getSeconds();
+	    // 拼接
+	    return year+"-"+month+"-"+day+" "+hours+":"+minutes+":"+seconds;
+	}
+	var timer = null;
+	var i =0;
+	function monitorStatus(){
+		timer = setInterval(refreshList, 1000);
+	}
+
+	function refreshList(){
+		console.log(location.href+"**********")
+		window.location.href = location.href;
+		
+	}
+</script>
+</html>
